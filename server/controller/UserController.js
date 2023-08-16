@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+const axios = require('axios');
 const SALT_ROUND = 10;
 
 const signup = async (req, res) => {
@@ -15,6 +16,8 @@ const signup = async (req, res) => {
         user_handphone: fields[4].value,
         user_role_id: fields[5].value,
         user_address: fields[6].value,
+        user_province: fields[7].value,
+        user_city: fields[8].value,
         user_photo: files[0].file.originalFilename,
       });
       return res.status(200).json({
@@ -47,8 +50,80 @@ const signin = async (req, res) => {
         return res.sendStatus(404);
     }
 }
- 
+
+const dropdownProvince = async (req, res) => {
+  try {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://api.rajaongkir.com/starter/province',
+      headers: { 
+        'key': '65358a6c1fa088be3b6fa599a7b1d0ea'
+      }
+    };
+
+    const response = await axios(config);
+    const province = response.data.rajaongkir.results;
+
+    const result = [];
+    for (let index = 0; index < province.length; index++) {
+      const data = {
+        province_id: province[index].province_id,
+        province: province[index].province
+        // province: req.query.province || province[index].province
+      }
+      result.push(data);
+    }
+
+    return res.status(200).json({
+      message: "Dropdown Province",
+      data: result
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message: error.message
+    })
+  }
+}
+
+const dropdownCity = async (req, res) => {
+  try {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://api.rajaongkir.com/starter/city',
+      headers: { 
+        'key': '65358a6c1fa088be3b6fa599a7b1d0ea'
+      }
+    };
+
+    const response = await axios(config);
+    const city = response.data.rajaongkir.results;
+
+    const result = [];
+    for (let index = 0; index < city.length; index++) {
+      const data = {
+        city_id: city[index].city_id,
+        city_name: city[index].city_name,
+        postal_code: city[index].postal_code
+      }
+
+      result.push(data)
+    }
+    return res.status(200).json({
+      message: "Dropdown Province",
+      data: result
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: error.message
+    });
+  }
+}
+
 export default {
     signup,
-    signin
+    signin,
+    dropdownProvince,
+    dropdownCity
 }

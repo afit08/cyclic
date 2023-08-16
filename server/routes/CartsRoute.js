@@ -8,7 +8,8 @@ const router = Router();
 // Admin
 router.post("/addCarts", authJWT.ensureCustomer, IndexController.CartsController.addCart);
 router.get("/showCarts", authJWT.ensureCustomer, IndexController.CartsController.allCart);
-router.post("/createPayment", authJWT.ensureCustomer, IndexController.CartsController.postToPayment);
-router.get("/formPayment", authJWT.ensureCustomer, IndexController.CartsController.showPayment);
+router.post("/createPayment/:id", authJWT.ensureCustomer, IndexController.CartsController.postToPayment);
+router.get("/formPayment/:id", authJWT.ensureCustomer, IndexController.CartsController.showPayment);
+router.get("/checkout/:id", authJWT.ensureCustomer, IndexController.CartsController.checkout);
 
 export default router;

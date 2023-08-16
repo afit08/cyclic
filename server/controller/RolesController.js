@@ -19,10 +19,6 @@ const createRoles = async (req, res) => {
 const allRoles = async (req, res) => {
     try {
         const result = await req.context.models.roles.findAll({
-            attributes: [
-                "role_id",
-                "role_name"
-            ]
         });
 
         return res.status(200).json({

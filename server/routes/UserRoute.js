@@ -7,6 +7,7 @@ const router = Router();
 
 router.post("/signin", authJWT.authenticate,authJWT.login);
 router.post("/signup", UploadDownloadHelper.uploadSingleFiles, IndexController.UserController.signup);
-//router.post("/refreshtoken",authJWT.refreshToken)
+router.get("/dropdownProvince", IndexController.UserController.dropdownProvince);
+router.get("/dropdownCity", IndexController.UserController.dropdownCity);
 
 export default router;

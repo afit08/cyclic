@@ -19,21 +19,34 @@ export default class form_payment extends Model {
         key: 'user_id'
       }
     },
-    fopa_cart_id: {
+    fopa_ongkir: {
       type: DataTypes.STRING(50),
-      allowNull: true,
-      references: {
-        model: 'carts',
-        key: 'cart_id'
-      }
+      allowNull: true
     },
-    fopa_payment_id: {
+    fopa_payment: {
       type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    fopa_created_at: {
+      type: DataTypes.DATE,
       allowNull: true,
-      references: {
-        model: 'payment_method',
-        key: 'payment_id'
-      }
+      defaultValue: Sequelize.Sequelize.fn('now')
+    },
+    fopa_image_transaction: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    fopa_rek: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    fopa_start_date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    fopa_end_date: {
+      type: DataTypes.TIME,
+      allowNull: true
     }
   }, {
     sequelize,

@@ -46,6 +46,14 @@ export default class users extends Model {
     user_personal_name: {
       type: DataTypes.STRING(100),
       allowNull: true
+    },
+    user_province: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    user_city: {
+      type: DataTypes.STRING(50),
+      allowNull: true
     }
   }, {
     sequelize,

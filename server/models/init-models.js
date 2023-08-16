@@ -19,12 +19,6 @@ config.db_password,
   logging : false,
   host: config.db_host, 
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: false,
-      rejectUnauthorized: false, // Set this to false for self-signed certificates.
-    },
-  },
   pool : {
     max : 5,
     min : 0,
@@ -43,12 +37,8 @@ const initModels = (sequelize) => {
   const roles = _roles.init(sequelize, DataTypes);
   const users = _users.init(sequelize, DataTypes);
 
-  form_payment.belongsTo(carts, { as: "fopa_cart", foreignKey: "fopa_cart_id"});
-  carts.hasMany(form_payment, { as: "form_payments", foreignKey: "fopa_cart_id"});
   products.belongsTo(categories, { as: "prod_cate", foreignKey: "prod_cate_id"});
   categories.hasMany(products, { as: "products", foreignKey: "prod_cate_id"});
-  form_payment.belongsTo(payment_method, { as: "fopa_payment", foreignKey: "fopa_payment_id"});
-  payment_method.hasMany(form_payment, { as: "form_payments", foreignKey: "fopa_payment_id"});
   carts.belongsTo(products, { as: "cart_prod", foreignKey: "cart_prod_id"});
   products.hasMany(carts, { as: "carts", foreignKey: "cart_prod_id"});
   users.belongsTo(roles, { as: "user_role", foreignKey: "user_role_id"});
