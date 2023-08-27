@@ -5,13 +5,13 @@ const Minio = require('minio');
 
 const uploadSingleFiles = async (req, res, next) => {
 
-    const minioClient = new Minio.Client({
-      endPoint: '127.0.0.1',
-      port: 9000,
-      useSSL: false,
-      accessKey: 'BglChwFsbcKfvpqt',
-      secretKey: 'DCwLEtgAQm0KDZ8NUBLO6tjO5bAes4wa'
-    });
+  const minioClient = new Minio.Client({
+    endPoint: process.env.MINIO_IP,
+    port: parseInt(process.env.MINIO_PORT),
+    useSSL: false,
+    accessKey: process.env.MINIO_ACCESS,
+    secretKey: process.env.MINIO_SECRET
+  });
   
     const form = formidable(minioClient);
     let files = [];

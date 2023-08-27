@@ -10,15 +10,15 @@ import _roles from  "./roles.js";
 import _users from  "./users.js";
 
 import config from "../config/config.js";
-
+require('dotenv').config();
 const sequelize = new Sequelize(
 config.db_name,
 config.db_username,
 config.db_password,
 {
   logging : false,
-  host: config.db_host, 
-  dialect: 'postgres',
+  host: process.env.DATABASE_HOST, 
+  dialect: process.env.DIALECT,
   pool : {
     max : 5,
     min : 0,

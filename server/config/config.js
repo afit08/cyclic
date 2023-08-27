@@ -6,8 +6,6 @@ const config = {
     db_name : process.env.DATABASE,
     db_username : process.env.DATABASE_USER,
     db_password: process.env.DATABASE_PASSWORD,
-    // db_host: process.env.POSTGRES_HOST,
-    // db_prisma: process.env.POSTGRES_PRISMA_URL,
     URL_DOMAIN : process.env.URL_DOMAIN,
     URL_IMAGE : process.env.URL_IMAGE,
     URL_API : process.env.URL_API,
